@@ -819,7 +819,7 @@ def _get_cert_data(student, course, course_key, is_active, enrollment_mode):
                     cert_url = configuration_helpers.get_configuration_value('CERT_URL', '')
                 else:
                     cert_url = ''
-                return CertData(cert_status, title, msg, download_url=None, cert_web_view_url = cert_url + cert_web_view_url)
+                return CertData(cert_status, title, msg, download_url=None, cert_web_view_url=cert_url + cert_web_view_url)
             else:
                 return CertData(
                     CertificateStatuses.generating,
