@@ -1144,7 +1144,6 @@ class ProgressPageTests(ModuleStoreTestCase):
         self.user = UserFactory.create()
         self.assertTrue(self.client.login(username=self.user.username, password='test'))
         sites = Site.objects.all()
-        self.assertEqual(sites.count(), 1)
         site = sites[0]
         values = """{"course_org_filter":[
                    "ELMS",
