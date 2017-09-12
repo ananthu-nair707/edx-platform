@@ -812,14 +812,14 @@ def _get_cert_data(student, course, course_key, is_active, enrollment_mode):
                 cert_web_view_url = certs_api.get_certificate_url(
                     course_id=course_key, uuid=cert_downloadable_status['uuid']
                 )
-                config_value = configuration_helpers.get_configuration_value('SHARED_ORG','')
+                config_value = configuration_helpers.get_configuration_value('SHARED_ORG', '')
                 course_obj = CourseSerializer()
                 course_org = course_obj.get_org(course)
                 if course_org in config_value:
-                    cert_url = configuration_helpers.get_configuration_value('CERT_URL','')
+                    cert_url = configuration_helpers.get_configuration_value('CERT_URL', '')
                 else:
                     cert_url = ''
-                return CertData(cert_status, title, msg, download_url=None, cert_web_view_url=cert_url+cert_web_view_url)
+                return CertData(cert_status, title, msg, download_url=None, cert_web_view_url = cert_url + cert_web_view_url)
             else:
                 return CertData(
                     CertificateStatuses.generating,
