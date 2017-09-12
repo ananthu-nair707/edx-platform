@@ -65,6 +65,7 @@ from openedx.core.djangoapps.credit.api import set_credit_requirements
 from openedx.core.djangoapps.credit.models import CreditCourse, CreditProvider
 from openedx.core.djangoapps.site_configuration.tests.factories import SiteConfigurationFactory
 
+
 @attr(shard=1)
 class TestJumpTo(ModuleStoreTestCase):
     """
