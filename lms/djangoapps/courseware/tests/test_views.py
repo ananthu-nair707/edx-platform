@@ -1145,7 +1145,9 @@ class ProgressPageTests(ModuleStoreTestCase):
         self.assertTrue(self.client.login(username=self.user.username, password='test'))
         sites = Site.objects.all()
         site = sites[0]
-        values = """{"course_org_filter":[
+        values = """
+                 {
+                 "course_org_filter":[
                    "ELMS",
                    "Shared"
                    ],
@@ -1155,7 +1157,8 @@ class ProgressPageTests(ModuleStoreTestCase):
                    "Shared"
                    ],
                    "CERT_URL":"http://example.com"
-                  }"""
+                 }
+                 """
         SiteConfigurationFactory.create(site=site, values=values)
         self.setup_course()
 
