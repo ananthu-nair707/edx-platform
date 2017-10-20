@@ -313,7 +313,7 @@ class ViewsTestCase(ModuleStoreTestCase):
         self.assertIn(unicode(self.problem2.location), response.content.decode("utf-8"))
 
     def test_index_nonexistent_chapter(self):
-        self._verify_index_response(expected_response_code=404, chapter_name='non-existent')
+        self._verify_index_response(expected_response_code=302, chapter_name='non-existent')
 
     def test_index_nonexistent_chapter_masquerade(self):
         with patch('courseware.views.index.setup_masquerade') as patch_masquerade:
@@ -322,7 +322,7 @@ class ViewsTestCase(ModuleStoreTestCase):
             self._verify_index_response(expected_response_code=302, chapter_name='non-existent')
 
     def test_index_nonexistent_section(self):
-        self._verify_index_response(expected_response_code=404, section_name='non-existent')
+        self._verify_index_response(expected_response_code=302, section_name='non-existent')
 
     def test_index_nonexistent_section_masquerade(self):
         with patch('courseware.views.index.setup_masquerade') as patch_masquerade:
@@ -575,11 +575,11 @@ class ViewsTestCase(ModuleStoreTestCase):
 
     def test_invalid_course_id(self):
         response = self.client.get('/courses/MITx/3.091X/')
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 302)
 
     def test_incomplete_course_id(self):
         response = self.client.get('/courses/MITx/')
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 302)
 
     def test_index_invalid_position(self):
         request_url = '/'.join([
@@ -592,7 +592,7 @@ class ViewsTestCase(ModuleStoreTestCase):
         ])
         self.assertTrue(self.client.login(username=self.user.username, password=self.password))
         response = self.client.get(request_url)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 302)
 
     def test_unicode_handling_in_url(self):
         url_parts = [
@@ -633,7 +633,7 @@ class ViewsTestCase(ModuleStoreTestCase):
         # TODO add a test for invalid location
         # TODO add a test for no data *
         response = self.client.get(reverse('jump_to', args=['foo/bar/baz', 'baz']))
-        self.assertEquals(response.status_code, 404)
+        self.assertEquals(response.status_code, 302)
 
     @unittest.skip
     def test_no_end_on_about_page(self):
@@ -2038,7 +2038,7 @@ class TestIndexViewWithGating(ModuleStoreTestCase, MilestonesTestCaseMixin):
             )
         )
 
-        self.assertEquals(response.status_code, 404)
+        self.assertEquals(response.status_code, 302)
 
 
 class TestRenderXBlock(RenderXBlockTestMixin, ModuleStoreTestCase):
@@ -2057,7 +2057,7 @@ class TestRenderXBlock(RenderXBlockTestMixin, ModuleStoreTestCase):
         Test XBlockRendering with invalid usage key
         """
         response = self.get_response(usage_key='some_invalid_usage_key')
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 302)
         self.assertIn('Page not found', response.content)
 
     def get_response(self, usage_key, url_encoded_params=None):

@@ -205,7 +205,7 @@ class ShoppingCartViewsTests(SharedModuleStoreTestCase, XssTestMixin):
 
         # page not found error because order_type is not business
         resp = self.client.get(billing_url)
-        self.assertEqual(resp.status_code, 404)
+        self.assertEqual(resp.status_code, 302)
 
         #chagne the order_type to business
         self.cart.order_type = 'business'
@@ -1042,7 +1042,7 @@ class ShoppingCartViewsTests(SharedModuleStoreTestCase, XssTestMixin):
 
         self.login_user()
         resp = self.client.get(reverse('shoppingcart.views.show_receipt', args=[cart2.id]))
-        self.assertEqual(resp.status_code, 404)
+        self.assertEqual(resp.status_code, 302)
 
         resp2 = self.client.get(reverse('shoppingcart.views.show_receipt', args=[1000]))
         self.assertEqual(resp2.status_code, 404)
@@ -1364,7 +1364,7 @@ class ShoppingCartViewsTests(SharedModuleStoreTestCase, XssTestMixin):
             response = self.client.post(url)
         else:
             response = self.client.get(url)
-        self.assertEquals(response.status_code, 404)
+        self.assertEquals(response.status_code, 302)
 
     @patch.dict('django.conf.settings.FEATURES', {'ENABLE_PAID_COURSE_REGISTRATION': False})
     def test_disabled_paid_courses(self):
@@ -1745,7 +1745,7 @@ class RegistrationCodeRedemptionCourseEnrollment(SharedModuleStoreTestCase):
         self.login_user()
         for i in xrange(30):  # pylint: disable=unused-variable
             response = self.client.post(url)
-            self.assertEquals(response.status_code, 404)
+            self.assertEquals(response.status_code, 302)
 
         # then the rate limiter should kick in and give a HttpForbidden response
         response = self.client.post(url)
@@ -1769,7 +1769,7 @@ class RegistrationCodeRedemptionCourseEnrollment(SharedModuleStoreTestCase):
         self.login_user()
         for i in xrange(30):  # pylint: disable=unused-variable
             response = self.client.get(url)
-            self.assertEquals(response.status_code, 404)
+            self.assertEquals(response.status_code,3022)
 
         # then the rate limiter should kick in and give a HttpForbidden response
         response = self.client.get(url)
