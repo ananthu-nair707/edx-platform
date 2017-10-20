@@ -84,7 +84,7 @@ class TestJumpTo(ModuleStoreTestCase):
         # can't use the reverse calls from the CMS
         jumpto_url = '{0}/{1}/jump_to/{2}'.format('/courses', unicode(self.course_key), unicode(location))
         response = self.client.get(jumpto_url)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 302)
 
     @unittest.skip
     def test_jumpto_from_chapter(self):
@@ -188,7 +188,7 @@ class TestJumpTo(ModuleStoreTestCase):
         location = Location('edX', 'toy', 'NoSuchPlace', None, None, None)
         jumpto_url = '{0}/{1}/jump_to_id/{2}'.format('/courses', unicode(self.course_key), unicode(location))
         response = self.client.get(jumpto_url)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 302)
 
 
 @attr(shard=2)
@@ -1232,7 +1232,7 @@ class ProgressPageTests(ModuleStoreTestCase):
             resp = self.client.get(
                 reverse('student_progress', args=[unicode(self.course.id), invalid_id])
             )
-            self.assertEquals(resp.status_code, 404)
+            self.assertEquals(resp.status_code, 302)
 
         # Assert that valid 'student_id' returns 200 status
         self._get_student_progress_page()
@@ -1807,7 +1807,7 @@ class GenerateUserCertTests(ModuleStoreTestCase):
     def test_user_with_invalid_course_id(self):
         # If try to access a course with invalid key pattern then 404 will return
         resp = self.client.post('/courses/def/generate_user_cert')
-        self.assertEqual(resp.status_code, 404)
+        self.assertEqual(resp.status_code, 302)
 
     def test_user_without_login_return_error(self):
         # If user try to access without login should see a bad request status code with message

@@ -272,7 +272,7 @@ class StaticHtmlBookTest(StaticBookTest):
         self.make_course()
         url = self.make_url('html_book', book_index=0, chapter=1)
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 302)
 
     def test_chapter_xss(self):
         # The chapter in the URL used to go right on the page.

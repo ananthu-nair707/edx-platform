@@ -157,7 +157,7 @@ class TestProgramListing(ProgramsApiConfigMixin, CredentialsApiConfigMixin, Shar
         self.create_programs_config(program_listing_enabled=False)
 
         response = self.client.get(self.url)
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 358)
 
     def test_empty_state(self):
         """
