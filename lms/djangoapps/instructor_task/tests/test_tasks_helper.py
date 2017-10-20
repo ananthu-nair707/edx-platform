@@ -853,7 +853,7 @@ class TestProblemReportCohortedContent(TestReportMixin, ContentGroupTestCase, In
         self.assertEqual(resp.status_code, 302)
 
         resp = self.submit_student_answer(self.beta_user.username, u'Problem0', ['Option 1', 'Option 2'])
-        self.assertEqual(resp.status_code, 404)
+        self.assertEqual(resp.status_code, 302)
         self.submit_student_answer(self.beta_user.username, u'Problem1', ['Option 1', 'Option 2'])
 
         with patch('lms.djangoapps.instructor_task.tasks_helper._get_current_task'):

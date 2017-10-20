@@ -609,7 +609,7 @@ class ViewsTestCase(ModuleStoreTestCase):
             url_parts_copy[idx] = val + u'χ'
             request_url = '/'.join(url_parts_copy)
             response = self.client.get(request_url)
-            self.assertEqual(response.status_code, 404)
+            self.assertEqual(response.status_code, 302)
 
     @override_settings(PAID_COURSE_REGISTRATION_CURRENCY=["USD", "$"])
     def test_get_cosmetic_display_price(self):

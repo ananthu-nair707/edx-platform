@@ -1045,7 +1045,7 @@ class ShoppingCartViewsTests(SharedModuleStoreTestCase, XssTestMixin):
         self.assertEqual(resp.status_code, 302)
 
         resp2 = self.client.get(reverse('shoppingcart.views.show_receipt', args=[1000]))
-        self.assertEqual(resp2.status_code, 404)
+        self.assertEqual(resp2.status_code, 302)
 
     def test_total_amount_of_purchased_course(self):
         self.add_course_to_user_cart(self.course_key)
@@ -1755,7 +1755,7 @@ class RegistrationCodeRedemptionCourseEnrollment(SharedModuleStoreTestCase):
         reset_time = datetime.now(UTC) + timedelta(seconds=300)
         with freeze_time(reset_time):
             response = self.client.post(url)
-            self.assertEquals(response.status_code, 404)
+            self.assertEquals(response.status_code, 302)
 
         cache.clear()
 
@@ -1769,7 +1769,7 @@ class RegistrationCodeRedemptionCourseEnrollment(SharedModuleStoreTestCase):
         self.login_user()
         for i in xrange(30):  # pylint: disable=unused-variable
             response = self.client.get(url)
-            self.assertEquals(response.status_code,3022)
+            self.assertEquals(response.status_code, 302)
 
         # then the rate limiter should kick in and give a HttpForbidden response
         response = self.client.get(url)

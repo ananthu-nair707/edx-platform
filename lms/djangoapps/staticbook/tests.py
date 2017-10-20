@@ -170,7 +170,7 @@ class StaticPdfBookTest(StaticBookTest):
         self.make_course(pdf_textbooks=[PDF_BOOK])
         url = self.make_url('pdf_book', book_index=1, chapter=1)
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 302)
 
     def test_no_book(self):
         # If we have no books, asking for the first book will fail with a 404.

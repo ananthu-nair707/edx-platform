@@ -107,7 +107,7 @@ class UserStandingTest(TestCase):
             'user': self.non_staff,
             'account_action': 'disable'
         })
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 302)
         self.assertEqual(
             UserStanding.objects.filter(user=self.good_user).count(), 0
         )

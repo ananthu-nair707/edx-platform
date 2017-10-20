@@ -369,7 +369,7 @@ class TestProgramDetails(ProgramsApiConfigMixin, SharedModuleStoreTestCase):
 
         self.mock_programs_api({})
         response = self.client.get(self.url)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 302)
 
     def test_page_routing(self):
         """Verify that the page can be hit with or without a program name in the URL."""
