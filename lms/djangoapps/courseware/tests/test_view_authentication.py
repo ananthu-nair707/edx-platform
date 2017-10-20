@@ -68,7 +68,7 @@ class TestViewAuth(ModuleStoreTestCase, LoginEnrollmentTestCase):
             for index, __ in enumerate(course.textbooks)
         ])
         for url in urls:
-            self.assert_request_status_code(404, url)
+            self.assert_request_status_code(302, url)
 
     def _check_staff(self, course):
         """
