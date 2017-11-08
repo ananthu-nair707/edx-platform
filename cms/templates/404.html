@@ -15,11 +15,12 @@ from openedx.core.djangolib.markup import HTML, Text
       <h1 class="title title-1">${_("Page not found")}</h1>
     </header>
     <article class="content-primary" role="main">
-      <p>${Text(_('The page that you were looking for was not found. Please contact {link_start}support{link_end} and let us know').format(
-        link_start=HTML('<a href="/faq">'),
-        link_end=HTML('</a>')
-      )}</p>
-        
+      <p>
+      ${_('The page that you were looking for was not found.')}
+       ${Text(_('Please contact {faqpage} and let us know')).format(
+         faqpage=HTML('<a href="/faq">support</a>')
+       )}
+      </p>  
     </article>
   </section>
 </div>
