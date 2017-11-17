@@ -240,7 +240,10 @@ def get_lms_base_values(org, default=None):
     """
     site_dict = {}
     for site in Site.objects.all():
-        site_config = SiteConfiguration.objects.get(site=site)
+        try:
+            site_config = SiteConfiguration.objects.get(site=site)
+        except:
+            return default
         if site_config.get_value('course_org_filter'):
             if org in site_config.get_value('course_org_filter'):
                 lms_base_value = site_config.get_value('LMS_BASE')
